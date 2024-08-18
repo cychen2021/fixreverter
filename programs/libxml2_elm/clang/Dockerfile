@@ -2,3 +2,4 @@ FROM fr_clang:latest
 COPY --from=elmfuzz/libxml2:latest /src /src
 ENV CC=clang
 ENV CXX=clang++
+RUN apt-get update -y && apt-get install -y automake libtool
