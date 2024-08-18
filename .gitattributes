@@ -1,1 +1,2 @@
 *.pickle filter=lfs diff=lfs merge=lfs -text
+FixReverter/phasar_plugin/include/**/* filter=lfs diff=lfs merge=lfs -text
