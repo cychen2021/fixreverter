@@ -5,8 +5,8 @@ ARG PLUGIN=/phasar-plugin
 ARG PHASAR_INSTALL_DIR=/usr/local/phasar
 ARG FR_INCLUDE=/fixreverter/include
 ARG LLVM_INSTALL_DIR=/usr/local/llvm-12
-COPY ../phasar_plugin_port/include/psrFuzzingEngine.o $FR_INCLUDE/
-COPY ../phasar_plugin_port/include/.psrFuzzingEngine.o.bc $FR_INCLUDE/
+COPY include/psrFuzzingEngine.o $FR_INCLUDE/
+COPY include/.psrFuzzingEngine.o.bc $FR_INCLUDE/
 ADD include/llvm-12 ${LLVM_INSTALL_DIR}
 
 RUN mkdir -p ${PHASAR}
