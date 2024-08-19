@@ -1,7 +1,9 @@
 FROM fr_phasar_port:latest
 COPY --from=elmfuzz/libxml2:latest /src /src
-ENV CC=clang
-ENV CXX=clang++
+ENV CC="wllvm"
+ENV CXX="wllvm++"
+ENV LLVM_COMPILER_PATH="/usr/local/llvm-10/bin"
+ENV LLVM_COMPILER="clang"
 RUN apt-get update -y && apt-get install -y automake libtool vim pkg-config liblzma-dev
 # Need to self-compile automake-1.16.3
 RUN apt-get remove -y automake
