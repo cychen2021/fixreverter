@@ -13,3 +13,5 @@ RUN ./configure
 RUN make
 RUN make install
 RUN ln -s /usr/local/bin/automake /usr/local/bin/automake
+WORKDIR /src
+ENV ACLOCAL_PATH=/usr/share/aclocal
