@@ -1,10 +1,10 @@
-FROM fr_phasar_port:latest
+FROM fr_phasar:latest
 COPY --from=elmfuzz/sqlite3:latest /src /src
 ENV CC="wllvm"
 ENV CXX="wllvm++"
 ENV LLVM_COMPILER_PATH="/usr/local/llvm-10/bin"
 ENV LLVM_COMPILER="clang"
-RUN apt-get update -y && apt-get install -y automake libtool vim pkg-config liblzma-dev
+RUN apt-get update -y && apt-get install -y automake libtool vim pkg-config liblzma-dev expect zlib1g-dev
 # Need to self-compile automake-1.16.3
 RUN apt-get remove -y automake
 WORKDIR /src
