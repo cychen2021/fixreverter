@@ -1,10 +1,13 @@
 FROM fr_phasar:latest
 COPY --from=elmfuzz/cpython3:latest /src /src
+ENV CFLAGS="$CFLAGS -lpthread"
+ENV CXXFLAGS="$CXXFLAGS -lpthread"
 ENV CC="wllvm"
 ENV CXX="wllvm++"
 ENV LLVM_COMPILER_PATH="/usr/local/llvm-12/bin"
 ENV LLVM_COMPILER="clang"
-RUN apt-get update -y && apt-get install -y automake libtool vim pkg-config liblzma-dev expect zlib1g-dev
+RUN apt-get update -y && apt-get install -y automake libtool vim pkg-config liblzma-dev expect \
+    zlib1g-dev libpthread-stubs0-dev
 # Need to self-compile automake-1.16.3
 RUN apt-get remove -y automake
 WORKDIR /src
