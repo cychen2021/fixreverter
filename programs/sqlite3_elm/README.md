@@ -1,7 +1,7 @@
 
 # Run FixReverter on the program sqlite3_elm
 
-## IMPORTANT NOTE
+## IMPORTANT HACK
 
 Go to `/phasar/lib/PhasarLLVM/Pointer/LLVMBasedPointsToAnalysis.cpp` and change line 115 to
 
