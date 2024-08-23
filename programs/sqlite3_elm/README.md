@@ -3,7 +3,7 @@
 
 ## IMPORTANT NOTE
 
-Go to `/phasar/lib/PhasarLLVM/Pointer/LLVMBasedPointerAnalysis.cpp` and change line 115 to
+Go to `/phasar/lib/PhasarLLVM/Pointer/LLVMBasedPointsToAnalysis.cpp` and change line 115 to
 
 ```c++
 AA.registerFunctionAnalysis<llvm::CFLSteensAA>();
