@@ -3,6 +3,7 @@
 
 #include "Utils/Utils.h"
 #include "Utils/Logs.h"
+#include <iostream>
 
 struct CallFlowFunction : psr::FlowFunction<DependenceAnalyzer::d_t> {
   const llvm::CallBase *callSite;
@@ -37,6 +38,12 @@ struct CallFlowFunction : psr::FlowFunction<DependenceAnalyzer::d_t> {
     GlobalData->FlowCounter ++;
     std::cout << "FlowCounter = " << GlobalData->FlowCounter << "\n";
     #endif
+
+    GlobalData->callCounter++;
+    if (GlobalData->callLimit != -1 && GlobalData->callCounter > GlobalData->callLimit) {
+      std::cout << "call limit " << GlobalData->callLimit << " reached\n";
+      return {};
+    }
 
     std::set<DependenceAnalyzer::d_t> res;
     if (!FlowSource->isZero()) {

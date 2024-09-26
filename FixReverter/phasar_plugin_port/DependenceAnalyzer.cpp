@@ -49,6 +49,11 @@ DependenceAnalyzer::DependenceAnalyzer(const ProjectIRDB *IRDB,
     : IFDSTabulationProblemPlugin(IRDB, TH, ICF, PT, EntryPoints) {
   ZeroValue = FFManager.getOrCreateZero();
 
+  string CallLimit = getEnvVar("FIXREVERTER_CALL_LIMIT");
+  if (!CallLimit.empty()) {
+    GlobalData->callLimit = stoi(CallLimit);
+  }
+
   string ApmPathStr = getEnvVar("FIXREVERTER_DA_APM");
   string OutPathStr = getEnvVar("FIXREVERTER_DA_OUT");
   string LogEnabled = getEnvVar("FIXREVERTER_LOG_ENABLED");

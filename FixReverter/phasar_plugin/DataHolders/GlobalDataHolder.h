@@ -28,6 +28,9 @@ struct GlobalDataHolder
                      TaintNodeHash, TaintNodeEquality> TaintPaths;
   std::unordered_map<const llvm::Function *, std::shared_ptr<FuncDataHolder>> MethodData;
   long FlowCounter = 0;
+
+  long callCounter = 0;
+  long callLimit = -1;
 };
 
 #endif

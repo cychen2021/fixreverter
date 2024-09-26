@@ -38,6 +38,12 @@ struct CallFlowFunction : psr::FlowFunction<DependenceAnalyzer::d_t> {
     std::cout << "FlowCounter = " << GlobalData->FlowCounter << "\n";
     #endif
 
+    GlobalData->callCounter++;
+    if (GlobalData->callLimit != -1 && GlobalData->callCounter > GlobalData->callLimit) {
+      std::cout << "call limit " << GlobalData->callLimit << " reached\n";
+      return {};
+    }
+
     std::set<DependenceAnalyzer::d_t> res;
     if (!FlowSource->isZero()) {
       auto SourceValue = FlowSource->get().value();
