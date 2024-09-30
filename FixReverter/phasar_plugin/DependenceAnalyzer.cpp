@@ -53,8 +53,11 @@ DependenceAnalyzer::DependenceAnalyzer(const ProjectIRDB *IRDB,
   if (!TimeLimit.empty()) {
     GlobalData->timeLimit = double(stoi(TimeLimit));
     GlobalData->startTime = time(0);
+    
+    char buff[80];
+    strftime(buff, 20, "%Y-%m-%d %H:%M:%S", localtime(&GlobalData->startTime));
     llvm::outs() << "Time limit set to " << GlobalData->timeLimit << " seconds" << "\n";
-    llvm::outs() << "Start time: " << GlobalData->startTime << "\n";
+    llvm::outs() << "Start time: " << buff << "\n";
   }
 
   string ApmPathStr = getEnvVar("FIXREVERTER_DA_APM");
