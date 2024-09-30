@@ -49,9 +49,12 @@ DependenceAnalyzer::DependenceAnalyzer(const ProjectIRDB *IRDB,
     : IFDSTabulationProblemPlugin(IRDB, TH, ICF, PT, EntryPoints) {
   ZeroValue = FFManager.getOrCreateZero();
 
-  string CallLimit = getEnvVar("FIXREVERTER_CALL_LIMIT");
-  if (!CallLimit.empty()) {
-    GlobalData->callLimit = stoi(CallLimit);
+  string TimeLimit = getEnvVar("FR_TIME_LIMIT");
+  if (!TimeLimit.empty()) {
+    GlobalData->timeLimit = double(stoi(TimeLimit));
+    GlobalData->startTime = time(0);
+    llvm::outs() << "Time limit set to " << GlobalData->timeLimit << " seconds" << "\n";
+    llvm::outs() << "Start time: " << GlobalData->startTime << "\n";
   }
 
   string ApmPathStr = getEnvVar("FIXREVERTER_DA_APM");

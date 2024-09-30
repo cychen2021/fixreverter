@@ -32,18 +32,20 @@ struct CallFlowFunction : psr::FlowFunction<DependenceAnalyzer::d_t> {
     }
   };
   std::set<DependenceAnalyzer::d_t> computeTargets(DependenceAnalyzer::d_t source) override {
+    if (GlobalData->timeLimit != -1) {
+      time_t now = time(0);
+      if (difftime(now , GlobalData->startTime) > GlobalData->timeLimit) {
+        logGeneralInfo(llvm::outs(), "Analyzer - [DEBUG] Time limit reached, skip this flow");
+        return {};
+      }
+    }
+
     auto FlowSource = source->as<MyFlowFact>();
 
     #if DEBUG_MODE == 1 && FLOW_COUNTER == 1
     GlobalData->FlowCounter ++;
     std::cout << "FlowCounter = " << GlobalData->FlowCounter << "\n";
     #endif
-
-    GlobalData->callCounter++;
-    if (GlobalData->callLimit != -1 && GlobalData->callCounter > GlobalData->callLimit) {
-      std::cout << "call limit " << GlobalData->callLimit << " reached\n";
-      return {};
-    }
 
     std::set<DependenceAnalyzer::d_t> res;
     if (!FlowSource->isZero()) {

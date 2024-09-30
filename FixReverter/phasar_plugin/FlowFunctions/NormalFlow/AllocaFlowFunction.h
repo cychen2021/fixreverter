@@ -19,6 +19,13 @@ public:
     psr::FlowFactManager<MyFlowFact> &FFManager) : GlobalData(GlobalData), Alloca(Alloca), PT(PT), FFManager(FFManager) {}
 
   std::set<DependenceAnalyzer::d_t> computeTargets(DependenceAnalyzer::d_t source) override {
+    if (GlobalData->timeLimit != -1) {
+      time_t now = time(0);
+      if (difftime(now , GlobalData->startTime) > GlobalData->timeLimit) {
+        logGeneralInfo(llvm::outs(), "Analyzer - [DEBUG] Time limit reached, skip this flow");
+        return {};
+      }
+    }
     auto FlowSource = source->as<MyFlowFact>();
     if (FlowSource->isZero()) {
       auto TaintKey = std::make_shared<ValueNode>(Alloca);

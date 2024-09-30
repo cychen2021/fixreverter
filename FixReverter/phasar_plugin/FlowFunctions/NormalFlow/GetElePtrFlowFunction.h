@@ -17,6 +17,13 @@ public:
     psr::FlowFactManager<MyFlowFact> &FFManager) : GlobalData(GlobalData), GetElePtrInst(GetElePtrInst), FFManager(FFManager) {}
 
   std::set<DependenceAnalyzer::d_t> computeTargets(DependenceAnalyzer::d_t source) override {
+    if (GlobalData->timeLimit != -1) {
+      time_t now = time(0);
+      if (difftime(now , GlobalData->startTime) > GlobalData->timeLimit) {
+        logGeneralInfo(llvm::outs(), "Analyzer - [DEBUG] Time limit reached, skip this flow");
+        return {};
+      }
+    }
     auto PointerOperand = GetElePtrInst->getPointerOperand();
     unsigned NumIndices = GetElePtrInst->getNumIndices();
     std::shared_ptr<FieldNode> FieldBasedTaint = NULL;

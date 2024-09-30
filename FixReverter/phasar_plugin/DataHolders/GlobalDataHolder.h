@@ -1,6 +1,7 @@
 #ifndef GLOBALDATAHOLDER_H_
 #define GLOBALDATAHOLDER_H_
 
+#include <ctime>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -29,8 +30,8 @@ struct GlobalDataHolder
   std::unordered_map<const llvm::Function *, std::shared_ptr<FuncDataHolder>> MethodData;
   long FlowCounter = 0;
 
-  long callCounter = 0;
-  long callLimit = -1;
+  time_t startTime = 0;
+  double timeLimit = -1;
 };
 
 #endif
