@@ -43,8 +43,8 @@ RUN echo "add_subdirectory(mainFuncLocator)" >> ${LLVMDIR}/clang-tools-extra/CMa
 RUN echo "add_subdirectory(utils)" >> ${LLVMDIR}/clang-tools-extra/CMakeLists.txt
 
 WORKDIR ${LLVMDIR}/build
-RUN cmake ../llvm -DCMAKE_C_FLAGS="-pthread" -DCMAKE_CXX_FLAGS="-pthread" -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra"
-RUN make -j30
+RUN cmake ../llvm -DCMAKE_BUILD_TYPE="Release" -DCMAKE_C_FLAGS="-pthread" -DCMAKE_CXX_FLAGS="-pthread" -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra"
+RUN make -j 30
 
 ADD drivers ${REPODIR}/drivers
 
