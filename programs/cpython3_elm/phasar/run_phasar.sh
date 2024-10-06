@@ -6,4 +6,4 @@ fi
 ulimit -s unlimited
 ulimit -a
 
-/phasar/build/tools/phasar-llvm/phasar-llvm -c plugin.conf -L
+/phasar/build/tools/phasar-llvm/phasar-llvm -c plugin.conf --right-to-ludicrous-speed
